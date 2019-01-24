@@ -1,0 +1,1769 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Web Accessibility for Designers</title>
+
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/design-accessibility-workshop.css">
+  <link rel="icon" sizes="73x73" href="https://twitter.com/a11yproject/profile_image?size=bigger">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="plugin/prism/prism.css">
+
+  <!-- Plugins -->
+  <link rel="stylesheet" href="plugin/accessibility/helper.css">
+  <link rel="stylesheet" href="plugin/title-footer/title-footer.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:900|Roboto:400,700|Source+Code+Pro:400,700" rel="stylesheet">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ?
+      'css/print/pdf.css' :
+      'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <!-- Intro -->
+
+        <section data-state="no-title-footer">
+          <h1 class="logo logo-font">Web Accessibility for Designers</h1>
+          <span class="byline">Essential Tools for Inclusive Design</span>
+          <ul style="font-size: 1.5rem;">
+            <li>Slides: <a href="https://github.com/svinkle/web-accessibility-for-designers-workshop/">github.com/svinkle/web-accessibility-for-designers-workshop</a></li>
+          </ul>
+          <aside class="notes">
+            <p>Hello everyone, I'm Scott Vinkle.</p>
+            <p>I'm a front end developer and accessibility advocate at Shopify.</p>
+            <p>During this workshop we'll be covering quite a few different topics. All of which will be focused on usability, accessibility, and inclusive thinking in design and user experience.</p>
+            <p>Essentially what we'll be discussing is common accessibility issues found in design, how they affect different user groups, and ways to overcome the barriers introduced for people with disabilities.</p>
+          </aside>
+        </section>
+
+        <!-- Agenda -->
+
+        <section>
+          <h2>Agenda</h2>
+          <ol>
+            <li>The basics of accessibility</li>
+            <li>Understanding various disabilities</li>
+            <li>Color contrast</li>
+            <li>Heading structure and design</li>
+            <li>Control design</li>
+            <li>Form design</li>
+            <li>Animation</li>
+            <li>Visual focus indicator</li>
+            <li>Touch targets/white space</li>
+            <li>Content</li>
+          </ol>
+          <p><strong>And much more!</strong></p>
+          <aside class="notes">
+            <p>Some of the topics we will discuss include:</p>
+            <ol>
+              <li>The basics of accessibility</li>
+              <li>Understanding various disabilities</li>
+              <li>Color contrast</li>
+              <li>Heading structure and design</li>
+              <li>Control design</li>
+              <li>Form design</li>
+              <li>Animation</li>
+              <li>Visual focus indicator</li>
+              <li>Touch targets/white space</li>
+              <li>Content</li>
+              <li>And a few other topics that I couldn't fit screen.</li>
+            </ol>
+            <p>Again, each topic will be brought back to how it affects a specific group of people.</p>
+          </aside>
+        </section>
+
+        <!-- Intros! -->
+
+        <section>
+          <h2>Intros! <span role="img" aria-label="">👋</span></h2>
+          <ol>
+            <li>Your name</li>
+            <li>Favorite Netflix show</li>
+            <li>What you hope to learn today</li>
+          </ol>
+          <aside class="notes">
+            <p>But first some quick introductions! Please tell us:</p>
+            <ol>
+              <li>Your first name</li>
+              <li>Your current favourite show on Netflix, or any show really</li>
+              <li>What you hope to learn today</li>
+            </ol>
+            <p>Before we get started, let's review this video on digital inclusion to help set the tone for the forthcoming content.</p>
+          </aside>
+        </section>
+
+        <!-- Apple video -->
+
+        <section>
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/XB4cjbYywqg?rel=0&amp;showinfo=0&amp;cc_load_policy=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Apple – Accessibility – Sady"></iframe>
+          <aside class="notes">
+            <p><em>(Play video)</em></p>
+          </aside>
+        </section>
+        <section>
+          <blockquote>Design with an inclusive mindset; create products everyone can use.</blockquote>
+          <aside class="notes">
+            <p>The key takeaway here is when we design with an inclusive mindset, we can make any product work well for anyone and everyone, including people with disabilities.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Basics of accessibility -->
+
+      <section>
+        <section data-background-image="images/concert.jpg">
+          <h2>What is accessibility?</h2>
+          <aside class="notes">
+            <p>When we speak about accessibility on the web we're talking about making sure our apps and web sites that we create are understandable and usable by people with disabilities. In doing so, we actually increase the usabilty for all.</p>
+            <p>Think of a few things in the physical world that have been implemented to aid folks with a disability; automatic doors, curb cuts at street intersections, elevators and escalators. These features are pretty great and make everyone's lives a little easier at one point or another.</p>
+            <p>Making something accessible does not only involve the code behind
+              the app or site, but <em>a lot</em> of what we design visually and the user experience we determine and set in place for our users plays a very large part in the accessibility of our products.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Mindfulness is key</h3>
+          <ul>
+            <li>Poor connection speed — Performance</li>
+            <li>Handheld device — Responsive design</li>
+            <li>Person with disability — Accessibility</li>
+          </ul>
+          <aside class="notes">
+            <p>Consider this: When you’re driving a car, it’s crucial to pay attention to your surroundings. To be a successful driver, you must take into account other drivers, cyclists, road signs, and pedestrians. Without this consideration for others, you face the potential of getting into trouble quite quickly.</p>
+            <p>Along the same lines, as designers and developers, when you are mindful of people and the various ways they use and interact with your website you help ensure a positive user experience for all.</p>
+            <ul>
+              <li>If you consider someone in a remote area of the world with a poor connection speed, you’ll make sure the site and all its assets will load quickly and perform optimally</li>
+              <li>If you consider someone doing research and learning about a topic using a handheld device, you’ll be sure to design a user interface that supports a wide range of device screen sizes and orientations</li>
+              <li>If you consider someone who is blind, hard of hearing, motor impairments, or who has difficulty understanding written text on a page, then you’ll design and structure content in a way that will help convey meaning and purpose for people who use and depend on assistive technology to experience the web.</li>
+            </ul>
+            <p>What really happens is that as you start thinking of and designing for people with disabilities, you end up actually improving the usability of a site for all users.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Disabilities</h3>
+          <ul>
+            <li>Visual impairments</li>
+            <li>Deafness / hard of hearing</li>
+            <li>Motor disabilities</li>
+            <li>Vestibular issues / seizure disorders </li>
+            <li>Cognitive disabilities</li>
+          </ul>
+          <aside class="notes">
+            <p>Who stands to benefit when we implement accessibility best practices? Who are the people that we're considering when we make these decisions? Well, in the end <em>everyone</em> benefits, but specifically, someone with a disability such as:</p>
+            <ul>
+              <li>Visual impairments</li>
+              <li>Deafness / hard of hearing</li>
+              <li>Motor disabilities</li>
+              <li>Vestibular issues / seizure disorders</li>
+              <li>Cognitive disabilities</li>
+            </ul>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Understanding Disabilities -->
+
+      <section>
+        <section data-background-image="images/business-newspaper-coffee-time_4460x4460.jpg">
+          <h2>Understanding Disabilities</h2>
+          <aside class="notes">
+            <p>Let's go a little more in-depth with each of the disabilities mentioned earlier to gain a clearer understanding of what they're about.</p>
+          </aside>
+        </section>
+
+        <!-- Visual impairments -->
+
+        <section>
+          <h3>Visual impairments</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/braille-reader.jpg" alt="A person using a braille reader.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li><strong>Low vision</strong> — difficulty seeing things clearly</li>
+                <li><strong>Color blindness</strong> — cannot perceive the difference between color</li>
+                <li><strong>Legally blind</strong> — only see light, vague shapes, or nothing at all</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>A visual impairment is anything that affects a person's ability to see clearly. In other words, if you don't have perfect 20/20 vision, you are considered to have a visual impairment.</p>
+            <p><strong>Q:</strong> Does anyone here use any assistive technology to help with their vision? <em>(Glasses are assistive tech!)</em></p>
+            <p>Some impairments can easily be corrected by simply wearing a pair of glasses or inserting contact lenses. Other impairments are more permanent, such as:</p>
+            <ul>
+              <li>
+                <p><strong>Low vision</strong></p>
+                <p>Difficulty seeing things clearly, which is common among the elderly, or due to genetics, traumatic injuries, or illnesses</p>
+              </li>
+              <li>
+                <p><strong>Color blindness</strong></p>
+                <p>Which means some folks cannot perceive (see) the difference between certain color combinations</p>
+              </li>
+              <li>
+                <p><strong>Legally blind</strong></p>
+                <p>Which doesn't necessarily mean someone can't see at all, but rather can only see light or vague shapes of objects</p>
+              </li>
+            </ul>
+            <p>Since the web is primarily a visual medium, it's important to design with an inclusive mindset, one which considers those who are able to see the screen and also those who use various <code>input</code> devices to interact with our user interfaces
+              who are unable to see the screen at all.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Challenges and assistive technology</h4>
+          <dl>
+            <dt>Challenges</dt>
+            <dd>People not being able to see the screen or have difficulty discerning color.</dd>
+            <dt>Assistive technology</dt>
+            <dd>Glasses, text zoom software, screen reader, braille reader.</dd>
+          </dl>
+          <aside class="notes">
+            <p>For visual impairments, some challenges include:</p>
+            <p>People not being able to see the screen or have difficulty discerning color.</p>
+            <p>Some assistive technology available to help consume content include:</p>
+            <p>Glasses, text zoom software, screen reader, braille reader.</p>
+          </aside>
+        </section>
+
+        <!-- Deafness / hard of hearing -->
+
+        <section>
+          <h3>Deafness / hard of hearing</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/people-signing.jpg" alt="Two people sitting on a couch signing.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li><strong>Deaf</strong> — very little or no functional hearing</li>
+                <li><strong>Hard of Hearing</strong> — mild-to-moderate hearing</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>The word <strong>deaf</strong> usually refers to an individual with very little or no functional hearing and who often uses sign language to communicate.</p>
+            <p>The term <strong>Hard of Hearing</strong> refers to an individual who has a mild-to-moderate hearing loss who <em>may</em> communicate through sign language, spoken language, or both.</p>
+            <p>It's important to note that the term <strong>Hearing Impaired</strong> is considered offensive to those in the community as many do not consider themselves as being impaired. Rather, the terms "deaf" and/or "hard of hearing" are considered
+              to be more positive.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Challenges and assistive technology</h4>
+          <dl>
+            <dt>Challenges</dt>
+            <dd>People not being able to hear video or audio content.</dd>
+            <dt>Assistive technology</dt>
+            <dd>Hearing aid, captions/audio descriptions, transcripts.</dd>
+          </dl>
+          <aside class="notes">
+            <p>For Deafness / hard of hearing, some challenges include:</p>
+            <p>People not being able to hear video or audio content.</p>
+            <p>Some assistive technology available to help consume content include:</p>
+            <p>Hearing aid, captions/audio descriptions, transcripts.</p>
+          </aside>
+        </section>
+
+        <!-- Motor disabilities -->
+
+        <section>
+          <h3>Motor disabilities</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/wheelchair-motocross.jpg" alt="A wheelchair user riding a pool at a skate park wearing a helmet.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li><strong>Paraplegia</strong> or <strong>quadriplegia</strong> — paralysis of the limbs</li>
+                <li><strong>Cerebral palsy</strong> — decreased muscle control</li>
+                <li><strong>Parkinson's disease</strong> — uncontrollable tremors</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>Motor disabilities are those which affect physical capabilities. These often lead to difficulties using <code>input</code> devices, such as a mouse or trackpad, and interacting with user interfaces.</p>
+            <p>Examples include but are not limited to:</p>
+            <ul>
+              <li><strong>Paraplegia or quadriplegia</strong>, a state of paralysis of the limbs, due to spinal cord injuries</li>
+              <li><strong>Cerebral palsy</strong>, an injury to the brain resulting in decreased muscle control</li>
+              <li><strong>Parkinson's disease</strong>, a disorder of the central nervous system that causes uncontrollable tremors</li>
+            </ul>
+            <p>For people with motor disabilities, ensuring full keyboard support is key to successfully navigating and completing tasks.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Challenges and assistive technology</h4>
+          <dl>
+            <dt>Challenges</dt>
+            <dd>Being accurate with interactions, using a mouse, interacting with small UI elements.</dd>
+            <dt>Assistive technology</dt>
+            <dd>Keyboard, voice dictation software, wand mouth stick</dd>
+          </dl>
+          <aside class="notes">
+            <p>For Motor disabilities, some challenges include:</p>
+            <p>Being accurate with interactions, using a mouse, interacting with small UI elements</p>
+            <p>Some assistive technology available to help consume content include:</p>
+            <p>Keyboard, voice dictation software, wand mouth stick</p>
+          </aside>
+        </section>
+
+        <!-- Vestibular issues / seizure disorders -->
+
+        <section>
+          <h3>Vestibular issues / seizure disorders</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/vestibular-disorder.jpg" alt="A young woman holds her head in pain.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li><strong>Vestibular disorder</strong> — feelings of dizziness or Vertigo</li>
+                <li><strong>Seizures</strong> — strobing, flickering, or flashing effects</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>For people with a <strong>Vestibular disorder</strong>, which is an issue with parts of the inner ear and brain that help control balance and eye movement, it is a common occurrence to experience feelings of dizziness or Vertigo which may be a result of animated
+              or moving objects on the screen.</p>
+            <p>There are other folks who are susceptible to <strong>seizures</strong> which are caused by strobing, flickering, or flashing effects.</p>
+            <p>With this in mind, it's a good idea to keep animations on the web to a minimum. We'll be discussing this in more detail later to find out what this entails.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Challenges and assistive technology</h4>
+          <dl>
+            <dt>Challenges</dt>
+            <dd>Navigating a web with an increasing amount of animations, no warning of flashing content</dd>
+            <dt>Assistive technology</dt>
+            <dd>Using "reader mode" to remove animations, "Reduce motion" operating system feature</dd>
+          </dl>
+          <aside class="notes">
+            <p>For Vestibular and seizure disorders, some challenges include:</p>
+            <p>Navigating a web with an increasing amount of animations, no warning of flashing content</p>
+            <p>Some assistive technology available to help consume content include:</p>
+            <p>Using "reader mode" to remove animations, "Reduce motion" operating system feature</p>
+          </aside>
+        </section>
+
+        <!-- Cognitive disabilities -->
+
+        <section>
+          <h3>Cognitive disabilities</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/attention-deficit.jpg" alt="A young child looks off into the distance. A teacher stands at a blackboard behind them, looking for their attention.">
+            </div>
+            <div class="grid__item">
+              <p><strong>Clinical diagnoses:</strong></p>
+              <ul>
+                <li>Autism</li>
+                <li>Down Syndrome</li>
+                <li>Dementia/Alzheimer's</li>
+              </ul>
+            </div>
+          </div>
+          <p><strong>Less severe:</strong></p>
+          <ul>
+            <li>Attention deficit disorder (ADD)</li>
+            <li>Dyslexia (difficulty reading)</li>
+            <li>Learning disabilities</li>
+          </ul>
+          <aside class="notes">
+            <p>There are many different types of cognitive disabilities. Clinical diagnoses of cognitive disabilities including but not limited to:</p>
+            <ul>
+              <li>Autism</li>
+              <li>Down Syndrome</li>
+              <li>Dementia/Alzheimer's</li>
+            </ul>
+            <p>Less severe cognitive conditions might include:</p>
+            <ul>
+              <li>Attention deficit disorder (ADD)</li>
+              <li>Dyslexia (difficulty reading)</li>
+              <li>Learning disabilities</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h4>Challenges and assistive technology</h4>
+          <dl>
+            <dt>Challenges</dt>
+            <dd>Reading content, understanding design patterns, completing timed tasks, general focus</dd>
+            <dt>Assistive technology</dt>
+            <dd>Using "reader mode" to remove distractions, <a href="https://www.kurzweiledu.com/">Kurzweil</a> software</dd>
+          </dl>
+          <aside class="notes">
+            <p>For Cognitive disabilities, some challenges include:</p>
+            <p>Reading content, understanding design patterns, completing timed tasks, general focus</p>
+            <p>Some assistive technology available to help consume content include:</p>
+            <p>Using "reader mode" to remove distractions, <a href="https://www.kurzweiledu.com/">Kurzweil</a> software, which is a piece of software which helps to increase reading comprehension for for those with a learning disability.</p>
+          </aside>
+        </section>
+
+        <!-- Temporary disabilities -->
+
+        <section>
+          <h3>Temporary disabilities</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/temporary-disability.jpg" alt="A person's arm slung in a temporary cast.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li>A broken arm or finger</li>
+                <li>Reading text on your phone while outside</li>
+                <li>Loud, busy environment</li>
+                <li>Having Lasik eye surgery</li>
+                <li>Traveling to a new country</li>
+                <li>Holding a baby in one arm and your phone in the other!</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>So far we've discussed many disabilities which can considered permanent. However, there is such a thing as a temporary disability. Perhaps you know someone or you yourself have been in a situation where you have limited abilities for a short
+              term.
+            </p>
+            <p>Consider the following situations:</p>
+            <ul>
+              <li>A broken arm or finger which limits your ability to only use one arm/hand</li>
+              <li>Trying to read text on your phone while outside in the sun—contrast!</li>
+              <li>A loud, busy area such as a bus terminal or train station might limit your cognitive thought process</li>
+              <li>Having Lasik eye surgery limits your vision for a period of time</li>
+              <li>Traveling to a new country and not understanding the local spoken language or street signs</li>
+              <li>Holding a baby in one arm while trying to look something up on your phone with the other!</li>
+            </ul>
+            <p>The point here is that, temporary or permanent, designing with accessibility in mind really helps everyone in any type of situation.</p>
+          </aside>
+        </section>
+        <section>
+          <blockquote>Make accessibility considerations for all disabilities to provide an inclusive user experience.</blockquote>
+          <aside class="notes">
+            <p>One of the key takeaways is to know that accessibility on the web is <em>not</em> just about figuring out how to make our content usable for screen readers, as this is what most people consider when they think of "accessibility" for the web.
+              Really though, screen readers are just the tip of the iceberg.</p>
+            <p>Accessibility considerations need to be made for all disabilities in order to provide a truly inclusive user experience.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- WCAG and the principles of accessibility -->
+
+      <section>
+        <section data-background-image="images/colorful-toy-gears_4460x4460.jpg">
+          <h2>The four principles of accessibility</h2>
+          <aside class="notes">
+            <p>Before we dive in to the workshop content, it's important discuss and understand where the recommendations for each issue is coming from.</p>
+            <p>All of the recommendations on accessibility best practices are derived from four base principles which help to provide the foundation of things web accessibility. When working together, each of of the four principles and their concepts help
+              to ensure an accessible user experience.</p>
+            <p>Right before we get into the principles and their definitions, it's good to know where they come from and who is responsible for the creation of and maintainance of this information.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>W3C <span role="img" aria-label="">👉</span> WAI <span role="img" aria-label="">👉</span> WCAG</h3>
+          <img src="images/wcag.png" alt="A screenshot of the WCAG homepage.">
+          <aside class="notes">
+            <p>The <a href="https://w3.org/">World Wide Web Consortium</a> (W3C) is an international community that develops open standards to ensure the long-term growth of the web. These standards include things such as the HTML and CSS specifications,
+              as well as standards for web payments, commerce, and security.</p>
+            <p>One key group formed from the W3C is the <a href="https://www.w3.org/WAI/">Web Accessibility Initiative</a> (WAI). This group is responsible for creating new content for and maintenance of the <a href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines</a>.</p>
+            <p>WCAG (also pronounced "wuh-cag") is a world-wide recognized standard for testing and implementing accessible user experiences for people with disabilities. It's used for desktop web, mobile web and native apps, and pretty much any type of
+              digital content.</p>
+            <!-- <p>It's latest version of the guidelines, WCAG 2.1, is what we'll be using today as the basis of the recommendations.</p> -->
+          </aside>
+        </section>
+        <section>
+          <h3>P.O.U.R.</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <ol>
+                <li>Perceivable</li>
+                <li>Operable</li>
+                <li>Understandable</li>
+                <li>Robust</li>
+              </ol>
+            </div>
+            <div class="grid__item">
+              <a href="https://www.redbubble.com/people/sundress/works/28033827-pandoanduandr-black"><img src="images/pour.png" alt="Perceivable & Operable & Understandable & Robust t-shirt."></a>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>The basis of each accessibility recommendation or best practice is actually derived from one of the four principles of accessibility. Each principal represents a set of guidelines which are to be followed in order to create a usable and accessible
+              experience.
+            </p>
+            <p>At a high-level, the principals include:</p>
+            <ul>
+              <li>Perceivable</li>
+              <li>Operable</li>
+              <li>Understandable</li>
+              <li>Robust</li>
+            </ul>
+            <p>So, let's look at these in more detail individually to see what they're all about.</p>
+          </aside>
+        </section>
+
+        <!-- Perceivable -->
+
+        <section>
+          <h4>Perceivable</h4>
+          <p>Interface components must be presentable to users in ways they can comprehend.</p>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/line-chart.gif" alt="A line graph with various patterns to denote each data point.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li>Short text equivalents for images</li>
+                <li>Description of data represented on charts</li>
+                <li>Brief descriptions of non-text content</li>
+                <li><code>label</code>s for controls and interface components</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Perceivable</strong> — Information and user interface components must be presentable to users in ways they can perceive (become aware or conscious of something; come to realize or understand how something works.) Examples include:</p>
+            <ul>
+              <li>Short text equivalents for images, including icons, <code>button</code>s, and graphics;</li>
+              <li>Description of data represented on charts, diagrams, and illustrations;</li>
+              <li>Brief descriptions of non-text content such as audio and video files;</li>
+              <li><code>label</code>s for form controls, <code>input</code>, and other user interface components.</li>
+            </ul>
+            <p>In other words, content needs to be available to at least one of the user's four senses</p>
+            <p> For example, if you have a visual impairment, can you see the content by zooming in on the content, does it have enough color contrast to be readable? If you're blind, does your screen reader work well with the content provide?</p>
+            <p>If you're deaf, is there a text alternative for that piece of audio content?</p>
+            <p>We need to make sure people can be made aware of and understand the content presented to them.</p>
+          </aside>
+        </section>
+
+        <!-- Operable -->
+
+        <section>
+          <h4>Operable</h4>
+          <p>User interface components and navigation must be operable or usable.</p>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/keyboard_large.jpg" alt="A person typing on a keyboard.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li>Functionality available by mouse is also available by keyboard</li>
+                <li>No keyboard traps</li>
+                <li>Web browsers and tooling provides keyboard support</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Operable</strong> — User interface components and navigation must be operable or usable (the interface cannot require interaction that a user cannot perform). This means user interfaces require keyboard access to all functionality.
+              Keyboard accessibility includes:
+            </p>
+            <ul>
+              <li>All functionality that is available by mouse is also available by keyboard;</li>
+              <li>Keyboard focus does not get trapped in any part of the content;</li>
+              <li>Web browsers, authoring tools, and other tools provide keyboard support.</li>
+            </ul>
+            <p>In other words, people need to be able to operate the web site. Not everyone uses or is capable of using a mouse so they may only use a keyboard or perhaps voice recognition software to announce commands.</p>
+          </aside>
+        </section>
+
+        <!-- Understandable -->
+
+        <section>
+          <h4>Understandable</h4>
+          <p>Information and the operation of user interface must be understandable or easily comprehensible.</p>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/japanese-street-sign.jpg" alt="A Japanese street sign.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li>Identify the primary language of a page</li>
+                <li>Providing definitions for uncommon words</li>
+                <li>Use clear and simple language</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Understandable</strong> — Information and the operation of user interface must be understandable or easily comprehensible. Content authors need to ensure that text content is readable and understandable to the broadest audience possible,
+              including when it is read aloud by text-to-speech software. Such content includes:</p>
+            <ul>
+              <li>Identifying the primary language of a web page, such as Arabic, Dutch, or Korean;</li>
+              <li>Providing definitions for any unusual or uncommon words, phrases, idioms, and abbreviations;</li>
+              <li>Using the clearest and simplest language possible, or providing simplified versions.</li>
+            </ul>
+            <p>So making sure interfaces and content is clear, consistent, and predictable
+              is key for making sure someone is able to understand and use your service.</p>
+          </aside>
+        </section>
+
+        <!-- Robust -->
+
+        <section>
+          <h4>Robust</h4>
+          <p>Content must be created in a way which can be interpreted reliably by a wide variety of user agents.</p>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/many-devices.jpg" alt="A table with various mobile phones and tablets.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li>Markup can be reliably interpreted</li>
+                <li>Provide a name, role, and value</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p><strong>Robust</strong> — Content must be robust and created in a way which can be interpreted reliably by a wide variety of user agents, including assistive technologies. In other words. robust content is compatible with different browsers,
+              assistive technologies and devices, kiosks, phones, toasters, any networked device. Examples of how this can be achieved include:</p>
+            <ul>
+              <li>Ensuring markup can be reliably interpreted, for instance by ensuring it is valid;</li>
+              <li>Providing a name, role, and value for non-standard user interface components.</li>
+            </ul>
+            <p>So, for example, can a older, mobile browser reliably output the same content as seen on a modern desktop browser? Does the content work well with a screen reader or braille reader?</p>
+          </aside>
+        </section>
+
+        <!-- P.O.U.R. conclusion -->
+
+        <section>
+          <blockquote>If any of these principles are not met, users with disabilities will not be able to use the web.</blockquote>
+          <aside class="notes">
+            <p>What all this means is, if any of these principles and guidelines are not met, users with disabilities will not be able to use the web. If someone's not able to understand our content, if they're not able to use the products we create on the device
+              that they have available, using the assistive technology they require to live their daily lives, then we have a problem.</p>
+            <p>Let's do our best to avoid creating these barriers.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Color contrast -->
+
+      <section>
+        <section data-background-image="images/design-plans-color-swatches_4460x4460.jpg">
+          <h2>Color contrast</h2>
+          <aside class="notes">
+            <p><strong>Contrast</strong> is the difference in luminance or colour that makes an object (or its representation in an image or display) distinguishable.</p>
+            <p>In other words, how readable is text against its background? If the contrast is low, people will have greater difficulty with reading the text. On the other hand, a higher contrast will allow for easy reading.</p>
+            <p>In regards to web accessibility, color contrast is the #1 offender on the web when it comes to accessibility issues. For example, colors like grey on black, light grey on white, etc. These color combinations, as well as a host of others, can be very difficult for some people to perceive.</p>
+            <p>In order to be more inclusive with our color choices, let's look at how we can test our colors to make sure they're actually readable.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Contrast threshold</h3>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Object</th>
+                <th scope="col">Ratio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Text and images of text</td>
+                <td><code>4.5:1</code></td>
+              </tr>
+              <tr>
+                <td>Large text (greater than <code>18pt</code>)</td>
+                <td><code>3.0:1</code></td>
+              </tr>
+              <tr>
+                <td>Non-text (borders, icons)</td>
+                <td><code>3.0:1</code></td>
+              </tr>
+            </tbody>
+          </table>
+          <aside class="notes">
+            <p>When it comes to choosing which colors to use for your design, there is a specific number, or contrast ratio, to reach for. This threshold has been determined by the W3C as a way to ensure people with <strong>low-vision</strong> are able to
+              read text content.</p>
+            <p>The threshold breakdown is as follows:</p>
+            <ul>
+              <li>Text and images of text, which is text content embedded within the image, has a ration of 4.5 to 1.</li>
+              <li>Larger text greater than 18 point has a ratio of 3.0 or 1.</li>
+              <li>And non-text content, including input borders and icons, also have a ratio of 3.0 or 1.</li>
+            </ul>
+            <p>As displayed here, the threshold is more forgiving for larger text and non-text content, such as <code>input</code> borders and icons. However, we still need to ensure these elements are also highly visible.</p>
+            <p>Now that we know what to watch for and which ratios should be used to test which type of content, how do we actually test the contrast ratio of our colors to ensure readability?</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Contrast tools</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <ul>
+                <li><a href="https://snook.ca/technical/colour_contrast/colour.html">Snook's Color Contrast Checker</a></li>
+                <li><a href="http://contrast-ratio.com/">Lea Verou's Contrast Ratio</a></li>
+                <li><a href="https://developers.google.com/web/updates/2018/01/devtools#contrast">Chrome Dev Tools</a></li>
+                <li><a href="https://developers.google.com/web/tools/lighthouse/#devtools">Lighthouse</a></li>
+                <li><a href="https://github.com/getflourish/Sketch-Color-Contrast-Analyser">Color Contrast Analyser for Sketch</a></li>
+              </ul>
+            </div>
+            <div class="grid__item">
+              <img src="images/chrome-contrast-ratio.png" alt="Screenshot of Chrome Developer Tools showcasing its color contrast test feature.">
+            </div>
+          </div>
+          <aside class="notes">
+            <p>We have available to us quite a number of color contrast testing tools. Some are more automated than others; which one you use might depend on your current need.</p>
+            <p>Here's a few contrast ratio tools to consider:</p>
+            <ul>
+              <li>Snook's Color Contrast Checker is a great tool for testing the contrast ratio, includes lots of other details and tools</li>
+              <li>Lea Verou's Contrast Ratio calculator has a nice and simple UI to test color contrast</li>
+              <li>Chrome Dev Tools now has color contrast tests built-in to its dev tools</li>
+              <li>Lighthouse is another set of tools built in to Chrome which includes automated accessibility testing, including color contrast tests</li>
+              <li>Color Contrast Analyser for Sketch is a Sketch plugin that calculates the color contrast of two layers and evaluates the output against WCAG requirements</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3>Don't rely on color alone</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/error-message.png" alt="Screenshot of input field in an error state; red border, light red background, red error text with icon below.">
+            </div>
+            <div class="grid__item">
+              <img src="images/error-message-bw.png" alt="Screenshot of input field in an error state which is difficult to notice; grey border, light grey background, grey error text with icon below.">
+            </div>
+          </div>
+          <ul>
+            <li>An icon along side error text</li>
+            <li>An underline for links embedded within body text</li>
+            <li>Textures or patterns to differentiate sections of a graph or chart</li>
+          </ul>
+          <aside class="notes">
+            <p>When it comes to relaying messages to the user, especially something important such as an error or success state of a form, how much time is left to complete an exercise, or sections of a pie chart, it's best to not rely on color alone to
+              convey this information. People with <strong>low vision</strong> or <strong>color blindness</strong> may not notice and miss seeing this information.</p>
+            <p>There are different types of <strong>color blindness</strong> and <strong>low-vision</strong> impairments which makes seeing specific colors difficult or impossible. With this in mind, to help convey this important information, it's ideal
+              to include other visual indicators such as:</p>
+            <ul>
+              <li>An icon along side error text</li>
+              <li>An underline for links embedded within body text</li>
+              <li>Textures or patterns to differentiate sections of a graph or chart</li>
+            </ul>
+            <p>With these extra visual affordances, people with color blindness, low-vision, or perhaps even a cognitive disability will have greater success in using and completing various tasks on your site or app.</p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">1.4.3 Contrast (Minimum)</a></h3>
+          <p>"The visual presentation of text and images of text has a contrast ratio of at least 4.5:1."</p>
+          <aside class="notes">
+            <p>This comes back to 1.4.3 Contrast (Minimum) which states</p>
+            <p>The visual presentation of text and images of text has a contrast ratio of at least 4.5:1.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Exercise! <span role="img" aria-label="">🎨</span></h3>
+          <ol>
+            <li><strong>Right click</strong> an element on the page which you suspect may have poor color contrast</li>
+            <li>Click <strong>Inspect</strong></li>
+            <li>In the <strong>Styles tab</strong>, find the <code>color</code> property and click the color swatch</li>
+            <li>Review the <strong>color contrast ratio</strong> value</li>
+            <li>Use the <strong>color picker</strong> to move the cursor above the white line in order to select an accessible color</li>
+          </ol>
+          <aside class="notes">
+            <p>Now that we have a few tools at our disposal, let's try it out! Open one of your favorite sites and try to test some of its colors with using the Chrome contrast tool.</p>
+            <ol>
+              <li>Right click an element on the page which you suspect may have poor color contrast</li>
+              <li>Click Inspect</li>
+              <li>In the Styles tab, find the color property and click the color swatch</li>
+              <li>Review the color contrast ratio value</li>
+              <li>Use the color picker to move the cursor above the white line in order to select an accessible color</li>
+            </ol>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Heading structure -->
+
+      <section>
+        <section data-background-image="images/wooden-structure-hall-with-long-tables_4460x4460.jpg">
+          <h2>Heading structure</h2>
+          <aside class="notes">
+            <p>Setting in place a solid heading structure and design for any site or app is key for building an accessible experience.</p>
+            <p>It's important that not only the code making up the heading structure is linear and is in a logical order, but also visually as well. When someone who depends on <strong>assistive technology</strong> visits a new site or page that they've never been to before, they'll often
+              first navigate by headings to get a sense of the content being offered on the page. It's the same idea, visually, for example someone reading through the headings of a newspaper; gather the general idea of the content available, then visit the sections of interest.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Logical heading order is key</h3>
+          <pre>
+            <code class="language-html">
+              &lt;h1&gt;Primary heading&lt;/h1&gt;
+              &lt;!-- … --&gt;
+
+              &lt;h2&gt;Sub-section&lt;/h2&gt;
+              &lt;!-- … --&gt;
+
+              &lt;h3&gt;Sub-sub-section&lt;/h3&gt;
+              &lt;!-- … --&gt;
+
+              &lt;h2&gt;Sub-section&lt;/h2&gt;
+              &lt;!-- … --&gt;
+            </code>
+          </pre>
+          <aside class="notes">
+            <p>For example, in your HTML you'd start with a single <code>h1</code> heading as the primary title of the page, followed by an <code>h2</code> heading for each major sub-section of content. If there were any sub-sub-sections, those would feature
+              <code>h3</code> headings. When a section of content is complete, the heading would return to the appropriate level to start the new section.</p>
+            <p>In addition to the HTML code behind the headings, the visual design of headings is also very important. Text sizes which go from large to medium to small denotes the content structure and related content. People with a <strong>cognitive impairment</strong>              or <strong>reading/learning disability</strong> will greatly appreciate content being split into pieces with headings conveying the message that, "this is a new section of content." Without headings, large walls of content can be quite difficult
+              for some people to consume and may even lead to a sense of overwhelm.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Examples</h3>
+          <ul>
+            <li><a href="https://codepen.io/svinkle/full/ZRwYPm/">No headings…</a></li>
+            <li><a href="https://codepen.io/svinkle/full/QxYyyp/">Some headings-ish…</a></li>
+            <li><a href="https://codepen.io/svinkle/full/PaVZzZ/">Solid headings</a></li>
+          </ul>
+          <aside class="notes">
+            <p>Checkout these examples. Notice the increased readability and understanding of the text as the headings are added to the document.</p>
+            <p><em>(Try out the last one using a screen reader)</em></p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-descriptive.html">2.4.6 Headings and Labels</a></h3>
+          <p>"Headings and labels describe topic or purpose."</p>
+          <aside class="notes">
+            <p>This comes back to 2.4.6 Headings and Labels which states</p>
+            <p>Headings and labels describe topic or purpose.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Control design -->
+
+      <section>
+        <section data-background-image="images/games-and-pizza_4460x4460.jpg">
+          <h2>Control design</h2>
+          <aside class="notes">
+            <p>What is actually meant by, "control design?" This is referring to the look and feel of the focusable elements: links and <code>button</code>s.</p>
+            <p>In modern web design, it's not uncommon to see links which look like <code>button</code>s; text with a background color and rounded borders, or a solid outline and transparent background. It's slightly less common to see <code>button</code>s
+              which look like links, but it does happen.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Control design and accessibility</h3>
+          <img src="images/link-button.png" alt="An underlined link with the text, 'Link'. A button with the text, 'Button'.">
+          <ul>
+            <li>Consistent control design allows people to identify and use with confidence</li>
+            <li>Voice dictation software accuracy</li>
+            <li>Color alone may not be enough to perceive the control</li>
+          </ul>
+          <aside class="notes">
+            <p>When it comes to accessibility best practices, the ideal design for each control would be something of a traditional look; colored text with an underline to denote a link and a solid background color with slightly rounded corners to denote
+              a <code>button</code>.</p>
+            <p>Why is it so critical to usability and accessibility for these elements to appear in this manner? Here's a few reasons:</p>
+            <ul>
+              <li>Having controls designed in a consistent manner allows people with a <strong>cognitive impairment</strong> to identify and use the control with confidence, that it will result in meeting their expectations.</li>
+              <li>When someone with a <strong>motor disability</strong> relies on voice dictation software and they announce, "click Submit button" when really the <code>button</code> is actually a link element, their command will not work.</li>
+              <li>When links are only distinguished by color alone, folks with <strong>color blindness</strong> or <strong>low-vision</strong> may not be able to perceive the link for a link and miss it completely.</li>
+            </ul>
+            <p>With links designed like links and <code>button</code>s designed like <code>button</code>s, everyone will benefit from the clear indication of which is which and will be able to use the controls with confidence. The idea is to avoid activating
+              something that they weren't expecting, causing them more work to undo the previous action.</p>
+            <p>In other words, make sure things are clear, consistent, and obvious.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Hover, focus, and active state</h3>
+          <aside class="notes">
+            <p>Another consideration when designing interface controls; the hover, focus, and active state.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Hover state</h3>
+          <img src="images/hover.gif" alt="An animated GIF highlighting mouse hover styles; from red to dark red.">
+          <pre>
+            <code class="language-css">
+              a:hover {
+                color: FireBrick;
+              }
+            </code>
+          </pre>
+          <aside class="notes">
+            <p>The hover state comes into play when someone using a mouse hovers over an interactive element. Changing the visual aspect to something like a background color or an underline greatly helps to generate a visual cue that the element they're
+              currently hovering on is interactive. It provides a sense of reassurance that this thing they're currently hovering over is indeed clickable.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Focus state</h3>
+          <img src="images/focus.gif" alt="An animated GIF highlighting keyboard focus styles.">
+          <pre>
+            <code class="language-css">
+              a:hover, a:focus  {
+                color: FireBrick;
+              }
+            </code>
+          </pre>
+          <aside class="notes">
+            <p>Likewise, when someone is using a keyboard to navigate through a page, the focus state should be made available to alter the visual aspect in order to denote the current position of the keyboard cursor on the page.</p>
+            <p>It's generally best practice to include focus visuals along side hover styling in order to provide a consistent visual treatment.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Active state</h3>
+          <img src="images/active.gif" alt="An animated GIF highlighting mouse activation styles; dark red to black.">
+          <pre>
+            <code class="language-css">
+              a:active {
+                color: Black;
+              }
+            </code>
+          </pre>
+          <aside class="notes">
+            <p>In addition to the hover and focus state, the active state is also available.</p>
+            <p>The active state shows only when an element is currently being interacted with. For example, when someone clicks down on a link and then releases the mouse button, that in-between state is the active state.</p>
+            <p>Including a unique active state style helps people with <strong>motor impairments</strong> or even <strong>dyslexia</strong> as when an item is interacted with, the active state serves as a confirmation and reassurance that the element was
+              clicked.
+            </p>
+            <p>I know I'm showing some code here but what's important is to include each state in your design and clearly annotate which color variation represents which state. This way a developer can implement these when they start their work.</p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/link-purpose-in-context.html">2.4.4 Link Purpose</a></h3>
+          <p>"The purpose of each link can be determined from the link text alone or from the link text together with its programmatically determined link context."</p>
+          <aside class="notes">
+            <p>This comes back to 2.4.4 Link Purpose which states</p>
+            <p>The purpose of each link can be determined from the link text alone or from the link text together with its programmatically determined link context.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Proximity/text zoom -->
+
+      <section>
+        <section data-background-image="images/city-view-binoculars_4460x4460.jpg">
+          <h2>Proximity/text zoom</h2>
+          <aside class="notes">
+            <p>Proximity issues can arise when interface elements are designed far apart from one another. This mostly affects people with <strong>low-vision</strong> who rely on Zoom software.</p>
+            <p>What happens when someone uses Zoom software is that they only see a small fraction of the screen at once. Usually the zoomed portion of the screen follows the current position of the mouse pointer.</p>
+            <p>As a result of someone only being able to see a small section at a time, oftentimes when attempting to complete a task, content is difficult to find or may be missed entirely.</p>
+            <p>How do we test to ensure there are minimal to no proximity issues within our designs? One relatively simple and effective method is to perform what's called, "the straw test."</p>
+          </aside>
+        </section>
+        <section>
+          <h3>The straw test</h3>
+          <ol>
+            <li>Take one hand and making a fist</li>
+            <li>Open your fist just enough to let a "straw" through</li>
+            <li>Hold your fist up to one of your eyes</li>
+          </ol>
+          <aside class="notes">
+            <p>How you perform the straw test? Taking one hand and making a fist. Then, you open your fist just enough to let a "straw" through. From this point, hold your fist up to one of your eyes and attempt to view your design.</p>
+            <p>When it comes to reviewing a design or reading content on the web, the typical reading flow in North America is top-to-bottom, left-to-right. With this in mind, get your straw tests ready and attempt to fill out this form:</p>
+          </aside>
+        </section>
+        <section>
+          <h3>The straw test "test" part 1</h3>
+          <ul>
+            <li><a href="https://codepen.io/svinkle/full/wXNMZr/">Poor Proximity</a></li>
+          </ul>
+          <aside class="notes">
+            <p>Was it easy or difficult to accomplish? Did you find yourself going back and forth to make sure the field you were viewing matched up with the <code>label</code> it was intended for? How long did it take you to complete?</p>
+            <p>This is a prime example of poor proximity. The form <code>label</code>s are much too far apart from their <code>input</code> elements. The submit <code>button</code> is on the bottom right, which would be much more difficult to locate than
+              if it were placed on the other side.</p>
+            <p>Let's revisit the same form but with its proximity issues fixed:</p>
+          </aside>
+        </section>
+        <section>
+          <h3>The straw test "test" part 2</h3>
+          <ul>
+            <li><a href="https://codepen.io/svinkle/full/LrqNPV/">Better Proximity</a></li>
+          </ul>
+          <aside class="notes">
+            <p>How was filling out this form compared to the last when testing with the straw test? Much faster and easier to fill out? Less frustrating?</p>
+            <p>This demonstrates why, ideally, forms are designed with the form <code>label</code> directly above the form field. This way the form is much easier to consume for people with low-vision who may be using zoom software. It also makes things
+              easier for everyone else in the end, as making things accessible often does.</p>
+            <p>The main purpose of the straw test is to ensure related elements and content in general is easily found for people with low-vision who rely on zoom software. Even with 20/20 vision, items which are located far apart can be difficult to find.</p>
+            <p>Let's make sure the user experience we create is easily discoverable and comfortable for our users. We don't want to make them work any harder than they already need to.</p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/sensory-characteristics.html">1.3.3 Sensory Characteristics</a></h3>
+          <p>"Instructions provided for understanding and operating content do not rely solely on sensory characteristics of components such as shape, size, visual location, orientation, or sound."</p>
+          <aside class="notes">
+            <p>This comes back to 1.3.3 Sensory Characteristics  which states</p>
+            <p>Instructions provided for understanding and operating content do not rely solely on sensory characteristics of components such as shape, size, visual location, orientation, or sound.</p>
+          </aside>
+        </section>
+        <section>
+          <img src="images/bank.png" alt="Screenshot of a bank website form. Primary input is at the top of a modal window, call to action buttons are at the bottom." class="img--large">
+          <aside class="notes">
+            <p>Quick note on this real-world example that I found…
+          </aside>
+        </section>
+      </section>
+
+      <!-- Form design -->
+
+      <section>
+        <section data-background-image="images/contact-us-flatlay_4460x4460.jpg">
+          <h2>Form design</h2>
+          <aside class="notes">
+            <p>Online forms are the foundation of communication in the modern age. Without forms, all we'd have would be static text websites with pictures of cats to look at. Sure, it doesn't sound too bad, but without forms, how would we discuss and share
+              cat pictures with all our friends and family? How about shopping online, booking a flight, ordering pizza late at night, or setting up a time to meet on that dating site?</p>
+            <p>This is why well-written form structure and design is critical to the success of any web form.</p>
+            <p>Let's take a look at a few areas on how we can increase accessibility when it comes to form design.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Labels</h3>
+          <aside class="notes">
+            <p>Having highly visible, clear, and precise form <code>label</code>s is critical to the success of anyone being able to fill out a form. Without a <code>label</code>, no one would know what the intended
+              purpose for each form field would be!</p>
+            <p>Let's look at a few design considerations when adding <code>label</code>s to our forms.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Placeholders</h4>
+          <ul>
+            <li><span role="img" aria-label="Not so good:">👎</span> Unable to convey the purpose of the <code>input</code> by screen readers</li>
+            <li><span role="img" aria-label="Not so good:">👎</span> Placeholder text is removed from view when typing</li>
+            <li><span role="img" aria-label="Not so good:">👎</span> May look like text has been entered</li>
+          </ul>
+          <p>Give the <a href="https://codepen.io/svinkle/full/VdgrZr/">Placeholder demo</a> a try.</a>
+          </p>
+          <aside class="notes">
+            <p>HTML form fields feature an attribute called <code>placeholder</code>. The value of the attribute places text inside the field and when someone starts to type, the placeholder text is automatically removed.</p>
+            <p>The original purpose of this attribute is to place helper or hint text inside the <code>input</code>. However, sometimes placeholders are being used in place of an actual HTML <code>label</code> element. This is problematic for a few reasons:</p>
+            <ul>
+              <li>Without a <code>label</code> element associated with the <code>input</code>, some <strong>screen readers</strong> may not be able to convey the purpose of the <code>input</code>.</li>
+              <li>When someone starts to type and the placeholder text is removed from view, the context of the <code>input</code> may be lost, forcing someone to remove the entered text in order to remember what the <code>input</code> was for.</li>
+              <li>In order to to meet color contrast requirements, the default grey text needs to be darkened. In doing so, this may confuse some people in thinking that text has already been entered into the <code>input</code>.</li>
+            </ul>
+            <p>There are <a href="https://www.smashingmagazine.com/2018/06/placeholder-attribute/">more issues</a> with the <code>placeholder</code> attribute, but with these few in mind it's clear that the placeholder should not be used as a replacement
+              for an actual <code>label</code>.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Floating labels</h4>
+          <ul>
+            <li><span role="img" aria-label="Good:">👍</span> "Floats" labels up above the input when typing</li>
+            <li><span role="img" aria-label="Good:">👍</span> Saves screen real estate</li>
+            <li><span role="img" aria-label="Good:">👍</span> <code>label</code> associated with its <code>input</code></li>
+            <li><span role="img" aria-label="Not so good:">👎</span> Small text size</li>
+            <li><span role="img" aria-label="Not so good:">👎</span> Potential for poor implementation</li>
+          </ul>
+          <p>Give the <a href="https://codepen.io/svinkle/full/NvazGb/">floating label demo</a> a try.</p>
+          <aside class="notes">
+            <p>The "floating label" technique seems to be picking up in popularity as of late. Depending on how it's implemented, the basic idea is to use CSS to position the <code>label</code> (or sometimes the placeholder) text over-top of the related
+              <code>input</code> element. When someone starts typing, the <code>label</code> is "floated" up and placed above the <code>input</code>.</p>
+            <p>The benefit to this approach is that it saves space in-between <code>input</code>s when screen real estate is tight. There's also the clear benefit of a <code>label</code> element being associated with its <code>input</code> element for screen
+              readers to convey the purpose of the <code>input</code>.</p>
+            <p>The downside to this approach is a direct result of its purpose of being; when the <code>label</code> is floated up above the <code>input</code>, the space available typically only allows for less than ideal text size. This could result in
+              difficulty reading the
+              <code>label</code> for anyone with <strong>low-vision</strong>. Of course, they could just zoom in on the screen, but why require creating more work for our users?</p>
+            <p>Then the other concern regards the actual implementation. If the technique ends up using the placeholder attribute instead of an actual <code>label</code>, it would result in issues previously discussed, mainly the lack of conveyed purpose
+              when interacted with a screen reader.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Always-visible labels</h4>
+          <ul>
+            <li><span role="img" aria-label="Good:">👍</span> <code>label</code> is consistent, predictable</li>
+            <li><span role="img" aria-label="Good:">👍</span> No cognitive load to remember the <code>input</code> purpose</li>
+            <li><span role="img" aria-label="Good:">👍</span> Screen reader support</li>
+            <li><span role="img" aria-label="Good:">👍</span> Full text size</li>
+          </ul>
+          <p>Try out the <a href="https://svinkle.github.io/angular-forms-next-level-a11y/">always-visible label demo</a> form.</p>
+          <aside class="notes">
+            <p>The ideal design of form <code>label</code>s when it comes to accessibility is the "always visible" <code>label</code>. Just as it sounds, this technique features a text <code>label</code> that is always present across the whole experience
+              of filling out the form.</p>
+            <p>The benefits of this approach are quite clear:</p>
+            <ul>
+              <li>The text <code>label</code> is in a consistent, predictable position</li>
+              <li>The <code>label</code> is always visible, requiring no cognitive load on having to remember the <code>input</code> purpose</li>
+              <li>Screen readers will convey the purpose of the <code>input</code> when interacted with</li>
+              <li><code>label</code> text is large with ample white space to be readable</li>
+            </ul>
+            <p>With all this in mind, it's strongly recommended to keep <code>label</code>s visible. Eliminate any guesswork required from your users and allow them to complete the task at hand with ease and confidence.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Required fields</h3>
+          <ul>
+            <li>Notes which fields are absolutely necessary to fill in</li>
+            <li>Ensure placement of the icon is consistent </li>
+            <li>Contrast ratio high enough to be visible</li>
+          </ul>
+          <p>See an <a href="https://svinkle.github.io/angular-forms-next-level-a11y/">example of required fields</a> notice.</p>
+          <aside class="notes">
+            <p>When only specific fields are required to fill out a form, it's best to denote this requirement with a visual cue. This helps people to know which fields they absolutely need to fill in which in turn provides reassurance when filling out the
+              form.
+            </p>
+            <p>Typically this is done with an asterisk character placed beside the form <code>label</code>. Weather you use the asterisk or some other form of icon, what's important here is:</p>
+            <ul>
+              <li>The placement of the icon is consistent throughout the form</li>
+              <li>The icon features a contrast ratio high enough to be visible (3.0:1 for non-text elements)</li>
+            </ul>
+            <p>In addition to the visual cue for each required field beside the <code>label</code>, it's also <em>ideal</em> (but not necessarily required) to place visual instructions at the top of the form noting what the icon is for. Something along the
+              lines of:</p>
+            <code>* denotes a required field</code>
+            <p>With this visible note, people with <strong>cognitive impairments</strong> will have less trouble with understanding what the icon is for.</p>
+            <p><em>(Load up a Shopify store as an example of an alternative method.)</em></p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/labels-or-instructions.html">3.3.2 Labels or Instructions</a></h3>
+          <p>"Labels or instructions are provided when content requires user input."</p>
+          <aside class="notes">
+            <p>This comes back to 3.3.2 Labels or Instructions which states</p>
+            <p>Labels or instructions are provided when content requires user input.</p>
+          </aside>
+        </section>
+        <section data-background-image="images/bsod.png">
+          <aside class="notes">
+            <p>The design of form error messaging can be quite delicate. The idea is to bring awareness to the current state of the form without being overwhelming. Unfortunately it's very easy to cause frustration or grief when displaying error states,
+              especially for those who aren't so tech savvy and who are already very cautious and on edge from using a computer in the first place.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Error messaging</h3>
+          <ul>
+            <li>Error text</li>
+            <li>Input styles</li>
+            <li>Error list</li>
+          </ul>
+          <aside class="notes">
+            <p>With this in mind, let's consider a design aesthetic which is informal and does its best to not be overbearing at the same time.</p>
+            <p>Three things to look at in this section include:</p>
+            <ul>
+              <li>Error text</li>
+              <li>Input styles</li>
+              <li>Error list</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h4>Error text</h4>
+          <img src="images/error-message-1.png" alt="Screenshot of input field in error state. Arrows point out features of error state which bring in attention.">
+          <aside class="notes">
+            <p>Error text is critical when conveying an error state. Without this text, people might not realize that the form is in a state in which it cannot be submitted. Sure, we could change the color of the <code>input</code> element, perhaps alter
+              its border or background properties to something recognizable as an error state. However, as we've already seen, relying on color alone to convey meaning is not ideal.</p>
+            <p>So, how do we ensure the <code>input</code> error state is properly conveyed? A few things we can do are:</p>
+            <ul>
+              <li>Output text which is meaningful and does not overwhelm the user with technical jargon</li> (<strong>cognitive impairment</strong>).
+              <li>Display the text below the related <code>input</code> (<strong>low-vision</strong>).</li>
+              <li>Ensure text is readable by testing its <strong>color contrast</strong>.</li>
+              <li>Optionally include an icon to help bring the users attention to the text.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h4>Input styles</h4>
+          <img src="images/error-message-2.png" alt="Screenshot of input field in an error state; red border, light red background, red error text with icon below.">
+          <aside class="notes">
+            <p>In addition to the error text to convey the current state, we can also consider altering the visual design of the <code>input</code>. This is typically done by adding a red border for extra visual aid. In doing so, people who are able to <strong>perceive</strong>              the color change will have a better understanding that this <code>input</code> requires their attention.</p>
+            <p>Optionally, sometimes the <code>input</code> background color is also changed to something like a light red. Use caution when altering the current state of the form so drastically; when some people are met with a wall of red, they can be easily
+              overwhelmed and feel a sense of frustration or self-doubt. The ideal state we wish our users to remain in is calm and confident. If they're able to get through filling out a web form with ease, they'll be more likely to return and recommend
+              you site or app to their friends and family.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Error list</h4>
+          <img src="images/error-list-1.png" alt="Screenshot of error list. Arrows point out features of error list which bring in attention.">
+          <aside class="notes">
+            <p>Presenting an error list is particularly useful on large forms. It's made up of a heading, explaining the current state of the form, followed by a link list. The list itself is best positioned above the form.</p>
+            <p>The heading is the primary method of bringing the error state to the users attention. Sighted users will see the large text and non-visual users will have the keyboard focus state, ideally, be brought to this portion of the screen.</p>
+            <p>The list portion is made up of a list element containing links. Each link represents a single error in the form. Its text would match that of the error text output below the related <code>input</code>. When activated, the keyboard focus would
+              switch from the link to the related <code>input</code>, allowing the user to focus and address the issue on hand.</p>
+            <p>The ideal positioning of the error list is directly above the form which is for user convenience. For example, if someone using a screen reader were to move forward past the error list, they would be brought to the form and the <code>input</code>              elements. Each <code>input</code> would be accompanied by their own error state text which would inform the user on how to adjust the form content to meet its requirements.</p>
+            <p>The error list, in combination with the error text below the <code>input</code>, ensures the user is notified of the current errors which need attention, and allows the user to not have to remember each error which needs fixing. The message
+              is available when then arrive at the <code>input</code> element.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Error list demo</h4>
+          <ul>
+            <li><a href="https://svinkle.github.io/angular-forms-next-level-a11y/">Angular Forms Demo — Next-Level Accessibility</a></li>
+          </ul>
+          <aside class="notes">
+            <p>As a demonstration, go to this form and try submitting with invalid data:</p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/error-identification.html">3.3.1 Error Identification</a></h3>
+          <p>"If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text."</p>
+          <aside class="notes">
+            <p>This comes back to 3.3.1 Error Identification which states</p>
+            <p>If an input error is automatically detected, the item that is in error is identified and the error is described to the user in text.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Animation -->
+
+      <section>
+        <section data-background-video="images/Nicole-Fidget-Cinemagraph.mp4" data-background-video-loop data-background-video-muted>
+          <h2>Animation</h2>
+          <aside class="notes">
+            <p>Have you ever had a bad day where you're just not feeling great? Perhaps you have a headache, or feeling nauseated from the night before? Then you go online to be greeted with a bunch of animation, scroll jacking, parallax motion, or a video background on a slide that it only make you feel worse! It happens to us all at some point or another.</p>
+            <p>Using animation on the web is a great way to bring a unique flare to your design and maybe add a bit of delight to your user experience. Well designed animations are informative; they let the user know something has taken place or are used
+              to guide the user to a new task which needs attention. Ideally, animations would be useful, predictable, and consistent.</p>
+            <p>On the other hand, poor use of animations might be distracting, take the attention away from the current task, and might even leave someone feeling queasy and disoriented.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>What actually makes up a "poor" animation</h3>
+          <ul>
+            <li>Size of movement — Keep animations small and purposeful</li>
+            <li>Direction and speed – Allow the user to scroll at their own pace.</li>
+            <li>Distance — Refrain from animating long lengths of content</li>
+          </ul>
+          <aside class="notes">
+            <p>Everyone will have a different reaction, or perhaps no reaction at all, to a piece of animation. For those who do experience a negative reaction, how to we avoid creating such an experience?</p>
+            <p>Here's a few points to consider when creating animations:</p>
+            <ul>
+              <li><strong>Size of movement.</strong> Small or compact animations, like a loading spinner, are helpful. However, if there's something moving from one side of the screen to another, especially critical pieces of content, this can be problematic.
+                Keep animations small and purposeful.</li>
+              <li><strong>Direction and speed.</strong> Parallax effects and scroll jacking, which tend to involve foreground and background elements moving at different speeds, or objects moving in different directions than expected, can cause issues. Allow
+                the user to scroll at their own pace.</li>
+              <li><strong>Distance.</strong> For animations which seem to span large lengths of space, although only the size of a computer screen, can sometimes trigger a negative experience. Again, it's best to keep animations small and compact in order
+                to avoid a negative user experience. Refrain from animating long lengths of content.</li>
+            </ul>
+            <p>Animation is something that can unexpected, and when it's there, we typically don't have a whole lot of control over the experience. How can we ensure when animation is in use that we also create an accessible experience?</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Animation and accessibility</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/vestibular-disorder.jpg" alt="A young woman holds her head in pain.">
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li>Someone with a cognitive impairment may get easily distracted or frustrated</li>
+                <li>Someone with Vestibular issues may experience vertigo or feel nauseated</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>How might adding animations to a website, app, or even an operating system, have a negative impact on those with a disability? Here's a couple ways:</p>
+            <ul>
+              <li>When it comes to someone with a <strong>cognitive impairment</strong>, setting in place a highly animated scene or activity upon completing an action, or having other moving pieces on the screen such as an auto-playing video or advertisement
+                can be very distracting.
+              </li>
+              <li>For folks who are susceptible to motion sickness or <strong> Vestibular issues</strong>, some animation can very easily lead to feelings of nausea or vertigo.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3>Animation example</h3>
+          <ul>
+            <li><a href="https://codepen.io/2975/pen/WdMMaR">Split Landing Page</a></li>
+            <li><a href="https://vimeo.com/cameo">Vimeo Cameo</a></li>
+            <li><a href="https://www.bolden.nl/">Bolden</a></li>
+            <li><a href="https://tankdesign.com/">Tank Design</a></li>
+            <li><a href="http://www.sbs.com.au/theboat/">The Boat</a></li>
+          </ul>
+          <aside class="notes">
+            <p>Before we move on to discuss methods of ensuring a positive user experience with animation, let's <em>briefly</em> look at a few examples…</p>
+            <p>Right before we do, I think there's no doubt that there was a lot of effort and creativity put into making each of these sites. However, we might be able to conclude that inclusivity was not in mind when these user experiences were designed.
+              Each example includes elements which would be problematic for some people with disabilities.</p>
+            <ul>
+              <li><a href="https://codepen.io/2975/pen/WdMMaR">Split Landing Page</a></li>
+              <li><a href="https://vimeo.com/cameo">Vimeo Cameo</a></li>
+              <li><a href="https://www.bolden.nl/">Bolden</a></li>
+              <li><a href="https://tankdesign.com/">Tank Design</a></li>
+              <li><a href="http://www.sbs.com.au/theboat/">The Boat</a></li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3>How to ensure "accessible-friendly" animations</h3>
+          <ul>
+            <li>Design subtle animations — minimize altering speed, movement, or control</li>
+            <li>Animations should be easily understood and predictable</li>
+            <li>Design a "no animation" state — allow people to use tools in their operating system</li>
+            <li>Allow animations to be paused — give control to the user</li>
+          </ul>
+          <aside class="notes">
+            <p>To be clear, the recommendation isn't to <em>not</em> use animation as some animations can be quite helpful. Let's look at a few ways to create an accessible and inclusive experience through use of animation:</p>
+            <ul>
+              <li>
+                <p><strong>Design subtle animations.</strong> Using animations in way that is subtle and used as a means to guide the user can be very helpful. Try to minimize animations which alter default speed, movement, and control that users are accustomed
+                  to.
+                </p>
+                <p>For example, when adding an item to a shopping cart, there could be an animation to highlight this activity as complete. Another example might be when submitting a dynamic form, animate an error or success message to draw the users attention
+                  to this area.</p>
+              </li>
+              <li>
+                <p><strong>Animations should be easily understood and predictable.</strong> In keeping with the "subtle" theme, animation should ideally be use in a way that people can understand the meaning behind the animation.</p>
+                <p>An example of which; the classic loading spinner. This helps to inform the user that progress is being made and a background process is being run. It basically conveys the message, "Please be patient while we process your data."</p>
+              </li>
+              <li>
+                <p><strong>Design a "no animation" state.</strong> It is possible for people to "turn-off" animations at an operating system level. For example, the macOS Accessibility settings features the "Reduce motion" option.</p>
+                <p>With this setting enabled, developers can take advantage of the CSS media query, "prefers-reduced-motion." Any styles applied within this media query would be those to produce the "no animation" state. This would be idea for any site featuring
+                  parallax scrolling; with this CSS media query in use, a developer could create a layout for a "static" alternative.</p>
+              </li>
+              <li>
+                <p><strong>Allow animations to be paused.</strong> If there are background videos, carousel sliders, or even animated GIF images on screen, provide a means for these types of content to be paused.</p>
+                <p>Build the pause control into each element, but if there are many different animations to be halted, consider designing and implementing a global, "Pause all animations" control. Your users who are susceptible to motion sickness will thank
+                  you.
+                </p>
+              </li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html">2.3.3 Animation from Interactions</a></h3>
+          <p>"Motion animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed."</p>
+          <aside class="notes">
+            <p>This comes back to 2.3.3 Animation from Interactions which states</p>
+            <p>Motion animation triggered by interaction can be disabled, unless the animation is essential to the functionality or the information being conveyed.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Exercise! <span role="img" aria-label="">🎈</span></h3>
+          <ol>
+            <li>Break into groups of 3 (or 4)</li>
+            <li>Each group gets 1 balloon</li>
+            <li>Designate someone to inflate and tie off the balloon</li>
+            <li>Toss the balloon between your group members, and…</li>
+            <li>Complete this task on your phone:
+              <ul>
+                <li>Find what's playing at a local movie theatre, this Saturday, 7pm</li>
+              </ul>
+            </li>
+            <li>Try not to drop the balloon!</li>
+          </ol>
+          <aside class="notes">
+
+          </aside>
+        </section>
+      </section>
+
+      <!-- Focus indicator -->
+
+      <section>
+        <section data-background-image="images/dj-crowd_4460x4460.jpg">
+          <h2>Focus indicator</h2>
+          <aside class="notes">
+            <p>One of the most basic aids to help people navigate an app with ease and confidence (and is baked in to every site by default) is the focus indicator.</p>
+            <p>What is the focus indicator? It's the visual indicator of where you currently are on a page when navigating by keyboard alone.</p>
+            <p>Load up your favorite site and start pressing the Tab key. Is there any indication of where the cursor currently is on the page? If you're in Chrome or Safari the default indicator is a blue outline, where Firefox and Internet Explorer/Edge
+              features a dashed black outline.</p>
+          </aside>
+        </section>
+        <section>
+          <blockquote>If you can't see where the cursor currently resides on the page, you've got an accessibility issue</blockquote>
+          <aside class="notes">
+            <p>For people with <strong>motor disabilities</strong> or any other impairment (temporary or permanent) which prevents use of the mouse, navigating with the keyboard is the next best option.</p>
+            <p>What happens when you use the Tab key on a site is the keyboard cursor will move from one HTML element to the next. The elements highlighted are naturally focusable. Elements such as links, <code>button</code>s, form <code>input</code>s, etc
+              all receive keyboard focus by default and should highlight when the cursor moves from one to the next.</p>
+            <p>Sometimes, the request is made to remove the focus indicator outline. This is usually a result of the outline being displayed on mouse interaction which can be viewed as a negative cosmetic result. While it is <strong>strongly</strong> recommended
+              to <em>not</em> remove the default indicator, there are a few work-arounds which could be used as a replacement.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Custom focus indicator</h3>
+          <pre>
+            <code class="language-css">
+              *:focus {
+                outline: solid 3px red;
+              }
+            </code>
+          </pre>
+          <p>Keep in mind…</p>
+          <ul>
+            <li>Ensure the contrast ratio of the indicator against the background is high. If people can't see the focus indicator the its purpose is lost.</li>
+            <li>Make it consistent. Since a custom focus indicator will be unexpected on first visit, it's a good idea to keep things consistent and predictable throughout the user experience of the site.</li>
+          </ul>
+          <aside class="notes">
+            <p>Using CSS it is possible to create your own focus indicator. With a bit of code such as…</p>
+            <p><em>(The code on the screen…)</em></p>
+            <p>…you can create a custom focus indicator. This places a solid red outline around focusable elements.</p>
+            <p>When implementing a custom outline, there are a couple things to keep in mind:</p>
+            <ul>
+              <li>Ensure the contrast ratio of the indicator against the background is high. If people can't see the focus indicator the its purpose is lost.</li>
+              <li>Make it consistent. Since a custom focus indicator will be unexpected on first visit, it's a good idea to keep things consistent and predictable throughout the user experience of the site.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3>Detect keyboard/mouse usage</h3>
+          <ul>
+            <li><a href="https://github.com/WICG/focus-visible">focus-visible</a></li>
+            <li><a href="https://github.com/ten1seven/what-input">what-input</a></li>
+          </ul>
+          <aside class="notes">
+            <p>There's been lots of great work done recently on detecting when someone's using a mouse or a keyboard to navigate site content. In doing so, designers are able to create a custom, highly visible focus indicator for keyboard users only. Mouse
+              users would be free to rely on only the mouse cursor as their indicator.</p>
+            <p>This technique is not yet built directly into browsers. However, there are third-party code snippets (also called a "polyfill") available to gain this functionality.</p>
+            <p>Two of which worth checkout out include:</p>
+            <p>When implementing a custom outline, there are a couple things to keep in mind:</p>
+            <ul>
+              <li>Ensure the contrast ratio of the indicator against the background is high. If people can't see the focus indicator the its purpose is lost.</li>
+              <li>Make it consistent. Since a custom focus indicator will be unexpected on first visit, it's a good idea to keep things consistent and predictable throughout the user experience of the site.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/navigation-mechanisms-focus-visible.html">2.4.7 Focus Visible</a></h3>
+          <p>"Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible."</p>
+          <aside class="notes">
+            <p>This comes back to WCAG 2.4.7 Focus Visible which states</p>
+            <p>Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Exercise! <span role="img" aria-label="">⌨️</span></h3>
+          <p>Go to your browser and open up some of your favorite sites. Try navigating with just the Tab key. Are you able to see where the keyboard cursor is currently placed? Or is there any focus indicator at all?</p>
+          <aside class="notes">
+            <p>Go to your browser and open up some of your favorite sites. Try navigating with just the Tab key. Are you able to see where the keyboard cursor is currently placed? Or is there any focus indicator at all?</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- Touch target size and whitespace -->
+
+      <section>
+        <section data-background-image="images/how-to-reach-us_4460x4460.jpg">
+          <h2>Touch target size and whitespace</h2>
+          <aside class="notes">
+            <p>How many of us have been in the situation where we try to touch/click an element on our phones but it's just too small! Or worse yet, we accidentally tap on something else we didn't mean to click on, resulting in having to find the back button
+              on the mobile browser to try again. Frustrating, right?</p>
+            <p>Specifically what we're talking about here are UI components such as hamburger menu controls, social media icons, form <code>input</code>s; basically anything that's a stand-alone element on a page., ie, not a an embedded link within body
+              content.
+            </p>
+          </aside>
+        </section>
+        <section>
+          <h3>Touch target size</h3>
+          <ul>
+            <li><a href="https://developers.google.com/web/fundamentals/accessibility/accessible-styles">Google's Web Fundamentals</a> — 48x48 pixels</li>
+            <li><a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/">Apple's Human Interface Guidelines</a> — 44x44 pixels</li>
+            <li><a href="https://www.w3.org/TR/WCAG21/#target-size">Web Content Accessibility Guidelines</a> — 44x44 pixels</li>
+          </ul>
+          <aside class="notes">
+            <p>When it comes to ensuring usability and accessibility concerns of touch target size, there are a few thing to keep in mind, including the available size of the element and space in between elements in order to avoid accidentally activating
+              something unintended. Here are a few rules to consider from other organizations:</p>
+            <ul>
+              <li><a href="https://developers.google.com/web/fundamentals/accessibility/accessible-styles">Google's Web Fundamentals</a> guide recommends a touch target size of <strong>48x48 pixels </strong>with at least <strong>8 pixels</strong> in between.</li>
+              <li><a href="https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/adaptivity-and-layout/">Apple's Human Interface Guidelines</a> recommends at touch target size of at least <strong>44x44 pixels</strong>.</li>
+              <li><a href="https://www.w3.org/TR/WCAG21/#target-size">Web Content Accessibility Guidelines</a> v2.1 also includes the recommendation of a touch target size of 44x44 pixels.</li>
+            </ul>
+            <p>What's important to note here is when it comes to design, making the actual icon larger to satisfy these recommendations isn't required. By using the CSS `padding` property we can make the touch area larger without affecting the design or
+              layout of the content.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Touch target example</h3>
+          <ul>
+            <li><a href="https://codepen.io/svinkle/pen/eKxJWK">Touch targets…</a></li>
+          </ul>
+          <aside class="notes">
+            <p>In the following example, trying adding padding to the link instead of margin. This keeps the same layout yet makes the actual touch portion of the link larger.</p>
+          </aside>
+        </section>
+        <section>
+          <h3><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/target-size.html">2.5.5 Target Size</a></h3>
+          <p>"The size of the target for pointer inputs is at least 44 by 44 CSS pixels."</p>
+          <aside class="notes">
+            <p>This comes back to 2.5.5 Target Size which states</p>
+            <p>The size of the target for pointer inputs is at least 44 by 44 CSS pixels.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Whitespace</h3>
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BE5WRtWPmAw?rel=0&amp;showinfo=0&amp;cc_load_policy=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="Hand tremor, scrolling accessibility problems"></iframe>
+          <aside class="notes">
+            <p>Using white space, which is the blank, empty area in between interactive components, is actually quite critical when designing and creating _usable_ user interfaces.</p>
+            <p>For example, it's not too uncommon to come across a group of links which are meant to behave as callout actions. Often these will be made up of three or more links in a grid and may feature no whitespace in between. This might provide a certain
+              aesthetic appeal, however when it comes to someone with a **motor impairment**, such as hand tremors where they're unable to control the movements of their own hands, the usability of navigating past these callout links becomes problematic.</p>
+            <p>Let's checkout the following video for an example:</p>
+            <p>As we've witnessed in this video, the person was having great difficulty when trying to navigate past these large touch target and repeatedly activated the links by accident. This is why it's ideal to place at least 8-10 pixels of whitespace
+              in between interactive elements. Without this white space, it can result in a frustrating user experience.
+          </aside>
+        </section>
+      </section>
+
+      <!-- Content is also design -->
+
+      <section>
+        <section data-background-image="images/rainbow-cake-layers_4460x4460.jpg">
+          <h2>Content is also design</h2>
+          <aside class="notes">
+            <p>Why do people visit your site? What keeps them coming back for more? Most likely its a result of high quality content. Content makes up the essence of the web and why people spend so much of their day there. As a result, content itself needs
+              to be well designed in order to create a comfortable user experience.</p>
+            <p>Not all users of the web have received the same amount of education in their lifetime. Some of us read at different levels and at different speeds. Those with a **learning disability** may have difficulty reading and comprehending content
+              which is full of jargon, acronyms, and other complexities.</p>
+            <p>How then, do we continue to write quality content that is both informative and inclusive to meet the needs of our readers?</p>
+          </aside>
+        </section>
+        <section>
+          <a href="http://www.hemingwayapp.com/"><img src="images/hemingwayapp.png" alt="Screenshot of hemingwayapp.com"></a>
+          <aside class="notes">
+            <p>In order to ensure content is readable and understandable by as many people as possible, consider testing your content readability with the Hemingway app. This handy utility app will read your content and make
+              recommendations based on how difficult it might be for someone to read and comprehend. Some of the recommendations include:</p>
+            <ul>
+              <li>Considerations when using adverbs</li>
+              <li>Use of passive voice</li>
+              <li>Complexity of phrases</li>
+              <li>Difficulties in sentence comprehension</li>
+            </ul>
+            <p>By running your content through this utility, you will end up restructuring your content to better suit a more general audience. The recommended reading level for inclusive content is usually 7th or 8th grade reading level. The Hemingway app
+              will let you know how your content measures up with this requirement.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Designing for Dyslexia</h3>
+          <div class="grid">
+            <div class="grid__item">
+              <br>
+              <ul>
+                <li><strong>Avoid</strong> justified text, always left/right align</li>
+                <li><strong>Avoid</strong> pure black text on pure white background</li>
+                <li><strong>Sparingly</strong> use <em>italicized</em> styles</li>
+                <li><strong>Consider</strong> offering <a href="https://www.dyslexiefont.com/">Dyslexie</a> as an option</li>
+              </ul>
+            </div>
+            <div class="grid__item">
+              <img src="images/dyslexie.jpg" alt="Screenshot of Dyslexie font characters.">
+            </div>
+          </div>
+          <aside class="notes">
+            <p>Someone with **Dyslexia**, which is a disability that impairs a person's fluency or accuracy in being able to read, write, and spell, may have difficulty reading the content on screen.</p>
+            <p>There are a few design considerations for making text itself readable for folks with Dyslexia. The following are things to **avoid** when designing content:</p>
+            <ul>
+              <li>**Justified text.** Text which is fully justified can cause dyslexic readers to repeatedly lose their place when reading. To avoid this frustration, always left align text (or right align, depending on your region.)</li>
+              <li>**High contrast.** Text which is styled to be pure black (#000000) against pure white (#ffffff) can generate a high contrast reading environment. As a result, some dyslexic users may experience words to swirl or blur together.</li>
+              <li>**Italicized content.** Use of italicized text can actually result in a poor reading experience for people with Dyslexia as a result of the slanted nature and extra pixelation of letter shapes. Use sparingly!</li>
+              <li>Consider offering Dyslexie font as an option — Dyslexie is a soecialized font face to help readers with dyslexia.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h3>Font size</h3>
+          <aside class="notes">
+            <p>Throughout the late 1990s and early 2000s, websites had body text anywhere between 9px and 14px. During this period designers only had to worry about 10” to 19” screen sizes for desktop computer.</p>
+            <p>Fast forward to around 2011, designers now had a massive plethora of screen sizes, orientations, and viewing lengths to consider. With the mass adoption of Responsive Web Design, these smaller font sizes did not work well on smaller, handheld devices. The new baseline font size became 16px and hasn’t changed much since.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Font size and accessibility</h4>
+          <div class="grid">
+            <div class="grid__item">
+              <a href="https://ux.shopify.com/considerations-when-writing-alt-text-a9c1985a8204"><img src="images/font-size.png" alt="Screenshot of the 'Considerations when writing alt text' article."></a>
+            </div>
+            <div class="grid__item">
+              <ul>
+                <li><strong>Readability</strong>: Better reading experience for those with low-vision</li>
+                <li><strong>Usability:</strong> Larger fonts, less content, less cognitive load</li>
+                <li><strong>Scannability:</strong> Quickly scan page content</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>Let’s consider a few reasons how larger font sizes increase the accessibility for any site.</p>
+            <ul>
+              <li><strong>Readability</strong>: Larger font sizes equates to increased readability. This makes for an easier reading experience for folks with low-vision, including older generations who usually require larger font on any UI due to eyesight deterioration. Bumping up the font size on any site by a few pixels greatly helps with readability.</li>
+              <li><strong>Usability:</strong> Larger fonts means less content required to fill available space in a design. Less content means less cognitive load on readers. Less content required also means being precise and direct when writing content, meeting the requirement of lowering the reading level, which in turn, increases readership and user base as a whole.</li>
+              <li><strong>Scannability:</strong> It’s quite common for people to quickly scan a page of content just to get a feel for what the page has to offer. With larger font sizes, especially headings when they’re designed and used in a visual hierarchy, this increases the sannability of content. The benefit again is to lower cognitive load. And on the flip side of the age equation, younger generations tend to have less patients and attention, therefore scannability is key to getting your message across to younger readers.</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <blockquote>Larger font size means less screen clutter which generates a clearer reading path and more of what people want; content.</blockquote>
+          <aside class="notes">
+            <p>Larger font size means less screen clutter which generates a clearer reading path and more of what people want; content.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>More design considerations</h3>
+          <aside class="notes">
+            <p>A few other things to consider when designing for text:</p>
+            <ul>
+              <li>Line length</li>
+              <li>Line height</li>
+              <li>Text zoom</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h4>Line length</h4>
+          <img src="images/line-length.png" alt="Screenshot of W3C Web Payments Working Group homepage.">
+          <aside class="notes">
+            <p>Optimal line length is typically between 55 to 75 or 80 characters per line. By limiting the width or horizontal span of content, users will experience less fatigue when scanning from right-to-left in search of the next line of content.</p>
+            <p>On the other hand, lines which are too short often force an awkward word break, resulting in reading difficulty. Be sure to test your UI in various situations and languages (if supported) to make sure line length isn’t too long or too short.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Line height</h4>
+          <a href="https://twitter.com/brad_frost/status/1034898720972857345"><img src="images/line-height.jpg" alt="Screenshot of Brad Frost's article discussing line height."></a>
+          <aside class="notes">
+            <p>Setting a line height affects the space inbetween lines of content. There’s no “optimal” setting per se, as this depends on the intended design and the font-face in use.</p>
+            <p>What’s important to note is a new WCAG SC introduced in 2.1: 1.4.12 Text Spacing. This states that when the user overrides the line height to improve their reading experience, no loss of content or functionality will occur when set to at least 1.5 times the font size.</p>
+            <p>In other words, design to allow for greater line height than intended in the original design and make sure content is still readable.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Text zoom</h4>
+          <img src="images/text-zoom.png" alt="Screenshot of a hotel booking website with 200% zoom enabled. Text elements are overlapped and difficult to read. ">
+          <aside class="notes">
+            <p>One other WCAG SC that’s important to consider when designing typography is 1.4.4 Resize text. This states that someone should be able to resize text up to 200% without loss of content or functionality.</p>
+            <p>In other words, allow for text and content containers to grow organically in size when text is resized. In CSS, static sizing units such as px are to be avoided. Whenever possible, use flexible units like %, em, or rem.</p>
+            <p>It’s also worth noting that text resize as referenced by this WCAG SC is different than the browser default zoom. Modern browsers today will zoom in using the viewport, essentially using CSS media queries to resize and align content. When the viewport is zoomed in far enough, you might see mobile styles and layout.</p>
+            <p>This is different than zooming by text alone, which only enlarges text an nothing else. To test for this, use Firefox text zoom option, or a browser extension with your prefered browser.</p>
+          </aside>
+        </section>
+        <section>
+          <h4><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html">1.4.4 Resize text</a></h4>
+          <p>"Except for captions and images of text, text can be resized without assistive technology up to 200 percent without loss of content or functionality."</p>
+          <aside class="notes">
+            <p>This comes back to 1.4.4 Resize text which states</p>
+            <p>Except for captions and images of text, text can be resized without assistive technology up to 200 percent without loss of content or functionality.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>Image alt text</h3>
+          <aside class="notes">
+            <p>Alt text, or "alternative text" as the long-form name suggests, is a written text description for an image on the web. It helps to describe the image for the reader to understand what the image is about.</p>
+            <p>In other words, alt text is content. And like any other content on your site, it should be well written and constructed, ready for consumption.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>Image alt text</h4>
+          <div class="grid">
+            <div class="grid__item">
+              <img src="images/screen-reader-alt-text.png" alt="Image on a web page with text bubble, 'Creative writing objects on a table; pens, pencils, a sketch book, and a cup of coffee. Image'">
+            </div>
+            <div class="grid__item">
+              <p>Benefits of <code>alt</code> text include <abbr title="Search Engine Optimization" aria-label="Search Engine Optimization">SEO</abbr>, and sighted users when the image fails to load.</p>
+              <p>However, screen reader users benefit most; allows participation in consuming non-text content.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            <p>There are a few situations where writing alt text and including well formed descriptions for your imagery is beneficial for a successful website, including search engine optimization and sighted users who are able to read the content when
+              and if an image fails to load. However, it is actually people who use and rely on assistive technology who have the most to gain when interacting with non-text content on the web.</p>
+            <p>Alt text provides people with **visual impairments** the ability to participate in consuming non-text content. When assistive technology, such as a screen reader, encounters an image on the web, the alt text is read and announced aloud. By
+              doing so, someone who relies on this technology can still have a clear understanding of what the image represents and be included in the conversation.</p>
+          </aside>
+        </section>
+        <section>
+          <h3>When to include alt text</h3>
+          <ul>
+            <li>If the image contains text, the <code>alt</code> value should be an exact match</li>
+            <li>If the image doesn’t add any value, the <code>alt</code> attribute value should be left empty</li>
+            <li>If the image adds content or value, add descriptive <code>alt</code> text</li>
+          </ul>
+          <aside class="notes">
+            <p>You might be tempted to always include some sort of text within the alt attribute. However, the fact remains that not every image should have a value set for its alt attribute.</p>
+            <p>How do we know when to include alt text for our images? Here are three common situations to consider if alt text should be added or if the alt attribute should be set as empty.</p>
+            <ul>
+              <li>If the image itself contains text, such as a logo or an inspirational quote embedded within the image, the alt attribute value should be an exact match of the visible text.</li>
+              <li>If the image doesn’t add any valuable content to the article, or is adjacent to related text content, the alt attribute value should be left empty. This results in screen readers bypassing the image altogether as it is considered a "decorative" image.</li>
+              <li>If the image is considered to add content or value to the article, add descriptive alt text.</li>
+            </ul>
+            <p>There are more examples and situations to consider. For a more comprehensive list, check out the tutorial, "An alt Decision Tree" linked in the notes.</p>
+          </aside>
+        </section>
+        <section>
+          <h4>How to write alt text</h4>
+          <ul>
+            <li>Be accurate and descriptive</li>
+            <li>Don't overwhelm with too much information</li>
+          </ul>
+          <aside class="notes">
+            <p>Writing high quality, descriptive alt text may not be as easy as it seems. A quick one-liner of "Cat on couch," "white shoes," or "group of people," doesn’t quite do the trick of painting a mental picture.</p>
+            <p>On the flip side, it is possible to overwhelm someone with too much descriptive text. Getting that fine line of descriptive precision is something of a skill master.</p>
+          </aside>
+        </section>
+        <section data-background-image="images/pair-of-navy-blue-skate-shoes_4460x4460.jpg">
+          <aside class="notes">
+            <p>As a test, let’s write some alt text for this image:</p>
+            <p>For this image, an accurate description might be something like:</p>
+          </aside>
+        </section>
+        <section data-background-image="images/pair-of-navy-blue-skate-shoes_4460x4460.jpg">
+          <blockquote>"A pair of low-top shoes are placed on top of a dark-brown table in front of a white brick wall. The shoes are mostly dark blue with a white midsole, brown laces, a black back tab, and white lining."</blockquote>
+          <aside class="notes">
+            <p>"A pair of low-top shoes are placed on top of a dark-brown table in front of a white brick wall. The shoes are mostly dark blue with a white midsole, brown laces, a black back tab, and white lining."</p>
+            <p>This description is pretty accurate, but a little too wordy. Since we’re describing a product we can focus directly on the product’s physical features.</p>
+            <p>Let’s cut the description back to just the essential, such as:</p>
+          </aside>
+        </section>
+        <section data-background-image="images/pair-of-navy-blue-skate-shoes_4460x4460.jpg">
+          <blockquote>"Dark blue, low-top shoes with white midsole, brown lace, black back tab, and white lining."</blockquote>
+          <aside class="notes">
+            <p>"Dark blue, low-top shoes with white midsole, brown lace, black back tab, and white lining."</p>
+            <p>This alt text does the trick; it describes the image in a clear and precise manner, not overwhelming someone as they take in the content. The general recommendation is to keep alt text to around 100 characters in order to hit that fine line of "just enough" content.</p>
+          </aside>
+        </section>
+        <section>
+          <h4><span aria-hidden="true">✅</span> <a href="https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html">1.1.1 Non-text Content</a></h4>
+          <p>"All non-text content that is presented to the user has a text alternative that serves the equivalent purpose."</p>
+          <aside class="notes">
+            <p>This comes back to 1.1.1 Non-text Content which states</p>
+            <p>All non-text content that is presented to the user has a text alternative that serves the equivalent purpose.</p>
+          </aside>
+        </section>
+      </section>
+
+      <!-- The end -->
+
+      <section>
+        <section>
+          <h2>Thank you! <span role="img" aria-label="">☺️</span></h2>
+          <img src="images/great-work.gif" alt="Animated GIF of Harry Potter saying, 'Great work everyone. Well, well done.' Children clapping.">
+          <p>Find me <a href="https://twitter.com/svinkle">@svinkle</a> — DMs are always open!</p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="plugin/prism/prism.js"></script>
+  <script>
+    Prism.plugins.NormalizeWhitespace.setDefaults({
+      'remove-trailing': true,
+      'remove-indent': true,
+      'left-trim': true,
+      'right-trim': true,
+      'break-lines': 52,
+      //'indent': 2,
+      'remove-initial-line-feed': true
+      //'tabs-to-spaces': 2,
+      //'spaces-to-tabs': 2
+    });
+  </script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      history: true,
+      slideNumber: true,
+      dependencies: [{
+          src: 'plugin/markdown/marked.js'
+        },
+        {
+          src: 'plugin/markdown/markdown.js'
+        },
+        {
+          src: 'plugin/notes/notes.js',
+          async: true
+        },
+        {
+          src: 'plugin/accessibility/helper.js',
+          async: true,
+          condition: function() {
+            return !!document.body.classList;
+          }
+        }
+      ]
+    });
+  </script>
+
+</body>
+
+</html>
